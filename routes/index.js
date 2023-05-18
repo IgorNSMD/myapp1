@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express MySQL P2' });
+  res.render('index', { title: 'Express MySQL P4' });
 });
 
 module.exports = router;
