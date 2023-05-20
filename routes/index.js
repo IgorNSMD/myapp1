@@ -1,5 +1,5 @@
 var express = require('express');
-// var Task = require('../models/task')
+var Task = require('../models/task')
 
 var router = express.Router();
 
@@ -7,7 +7,7 @@ var router = express.Router();
 router.get('/', async function(req, res, next) {
   // const task = await Task.findAll({})
   //console.log(task)
-  res.render('index', { title: 'Express MySQL P9' });
+  res.render('index', { title: 'Express MySQL P10' });
 });
 
 module.exports = router;

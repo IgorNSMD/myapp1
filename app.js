@@ -3,56 +3,28 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var dotenv = require('dotenv');
-var fs = require("fs")
 
-var Sequelize = require('sequelize');
-dotenv.config({
-  path:'.env'
-})
-const db = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,{
-      host:process.env.DB_HOST,
-      port:3306,
-      dialect:'mysql',
-  define: {
-      timestamps: true
-  },
-  pool:{
-      max:5,
-      min:0,
-      acquire:30000,
-      idle:10000
-  },
-  dialectOptions: {
-      ssl: {
-          ca: fs.readFileSync(__dirname + '/config/ssl/DigiCertGlobalRootCA.crt.pem')
-      }
-  }
-  //operatorsAliases:false
-});
 
-(async () => {
+var db = require('./config/db')
+
+async function conn() { 
+  //conexión a la la bd
   try {
     await db.authenticate();
-    console.log('Connection has been established successfully.');
+    db.sync();
+    console.log('conexión correcta a la bd...')
   } catch (error) {
-    console.error('Unable to connect to the database:', error);
+    console.log(error)
   }
-})();
 
+}
 
-
-//var db = require('./config/db')
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
-
+conn();
 
 var app = express();
 
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
 
 // view engine setup
