@@ -7,7 +7,7 @@ var router = express.Router();
 router.get('/', async function(req, res, next) {
   // const task = await Task.findAll({})
   //console.log(task)
-  res.render('index', { title: 'Express MySQL P7' });
+  res.render('index', { title: 'Express MySQL P8' });
 });
 
 module.exports = router;
