@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const { format } = require("date-fns");
 
 var db = require('./config/db')
 
@@ -39,6 +39,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use("/js", express.static(__dirname + "/node_modules/bootstrap/dist/js")); // redirect bootstrap JS
+app.use(
+  "/css",
+  express.static(__dirname + "/node_modules/bootstrap/dist/css")
+); // redirect CSS bootstrap
+
+app.locals.format = format;
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
