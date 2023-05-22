@@ -8,7 +8,7 @@ router.get('/', async function(req, res, next) {
   try {
     const task = await Task.findAll()
     //console.log(task)
-    res.render('index', { title: 'Express MySQL P15' });
+    res.render('index', { title: 'Express MySQL P16' });
   } catch (error) {
     console.log(error)
   }
